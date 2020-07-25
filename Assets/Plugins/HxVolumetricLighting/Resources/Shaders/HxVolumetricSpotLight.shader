@@ -549,7 +549,8 @@ vr MarchColor(float3 dir, float dis, float3 wpos, float2 uv, float2 InterleavePo
 		float phase = HenyeyPhase(dot(normalize(tolight), -RayDirection));
 
 		float att = dot(tolight, tolight) * (1.0 / (_LightParams.z * _LightParams.z));
-		float atten = tex2Dlod(_FalloffTex, float4(att, 0, 0, 0)).a;
+		//float atten = tex2Dlod(_FalloffTex, float4(att, 0, 0, 0)).a;
+		float atten = 60/dot(tolight,tolight) * pow(1-att,16);
 		atten *= tex2Dlod(_LightTexture0, float4(suv.xy, 0, 0)).a;
 
 		//add to slices....
